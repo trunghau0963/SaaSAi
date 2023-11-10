@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 // import axios, {isCancel, AxiosError} from 'axios';
-import api from "@/utils/api";
+import api from "@/lib/utils";
 import { useToast } from "./ui/use-toast";
 
 interface SubcriptionButtonProps {

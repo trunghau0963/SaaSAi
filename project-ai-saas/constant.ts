@@ -1,3 +1,4 @@
+import { ToolItemsProps } from "./config/model";
 export const MAX_FREE_COUNT = 5
 
 export const THEME_MODES = [
@@ -12,7 +13,7 @@ export const THEME_MODES = [
   ];
 
 
-  export const TOOLS = [
+  export const TOOLS  :ToolItemsProps[]  = [
     {
       title: "Conversation",
       icon: "/icons/conversation.svg",
@@ -30,7 +31,7 @@ export const THEME_MODES = [
     {
       title: "Video generation",
       icon: "/icons/video.svg",
-      url: "/videos",
+      url: "/video",
       color: "bg-amber-500",
       slug: "video"
     },

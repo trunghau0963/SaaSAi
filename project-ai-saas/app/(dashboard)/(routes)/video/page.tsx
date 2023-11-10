@@ -12,7 +12,12 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import UserMessage from "@/components/dashboard/user-message";
 import AiResponse from "@/components/dashboard/ai-response";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem
+} from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import Loading from "@/components/loading";
 import { useToast } from "@/components/ui/use-toast";
@@ -21,17 +26,17 @@ import { useProStore } from "@/store/pro-store";
 
 const formSchema = z.object({
   prompt: z.string().min(1, {
-    message: "Prompt is required",
+    message: "Photo prompt is required"
   }),
 });
 
 interface MessageType {
   // id: string;
   content: string;
-  role: "user" | "assistant";
+  role: 'user' | 'assistant';
 }
 
-const ConversationPage = () => {
+const VideoPage = () => {
   const { handleOpenOrCloseProModal } = useProStore();
   const { toast } = useToast();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -40,7 +45,7 @@ const ConversationPage = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-    },
+    }
   });
 
   const isLoading = form.formState.isSubmitting;
@@ -49,31 +54,28 @@ const ConversationPage = () => {
     if (containerRef.current) {
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
-  };
+  }
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setMessages((current) => [
-        ...current,
-        {
-          // id: uuidv4(),
-          role: "user",
-          content: values.prompt,
-        },
-        {
-          // id: uuidv4(),
-          role: "assistant",
-          content: "",
-        },
-      ]);
+      setMessages(current => ([...current, {
+        // id: uuidv4(),
+        role: 'user',
+        content: values.prompt
+      },
+      {
+        // id: uuidv4(),
+        role: 'assistant',
+        content: ""
+      }]));
       handleScrollToBottom();
       form.reset();
 
-      const { data } = await api.post("/api/conversation", values);
+      const { data } = await api.post('/api/video', values);
 
-      setMessages((current) => {
+      setMessages(current => {
         const newMessages = [...current];
-        newMessages[newMessages.length - 1].content = data;
+        newMessages[newMessages.length - 1].content = data[0];
         return newMessages;
       });
       handleScrollToBottom();
@@ -88,51 +90,52 @@ const ConversationPage = () => {
         });
       }
     }
-  };
+  }
 
   const handleClearChat = () => {
     setMessages([]);
-  };
+  }
 
   return (
     <div className="h-full relative flex flex-col justify-between">
       <div
         ref={containerRef}
-        className="h-[calc(100vh-180px)] overflow-y-auto space-y-10 scroll-smooth"
-      >
-        {messages.length > 0 ? (
-          <>
-            {messages.map((m, idx) => (
-              <div key={idx} className="whitespace-pre-wrap">
-                {m.role === "user" ? (
-                  <UserMessage>{m.content}</UserMessage>
-                ) : (
-                  <AiResponse>
-                    {m.content ? (
-                      <div
-                        className={cn(
+        className="h-[calc(100vh-180px)] relative overflow-y-auto space-y-10 scroll-smooth">
+        {messages.length > 0
+          ? <>
+            {
+              messages.map((m,idx) => (
+                <div key={idx} className="whitespace-pre-wrap">
+                  {m.role === 'user' ?
+                    <UserMessage>{m.content}</UserMessage>
+                    :
+                    <AiResponse>
+                      {
+                        m.content ? <div className={cn(
                           "block mb-4 space-y-4",
                           "lg:flex lg:flex-wrap lg:items-center lg:space-x-4 lg:space-y-0"
-                        )}
-                      >
-                        <h4>{m.content}</h4>
-                      </div>
-                    ) : (
-                      <Loading />
-                    )}
-                  </AiResponse>
-                )}
-              </div>
-            ))}
-            <div className="absolute left-0 bottom-20 text-right w-full pr-3">
-              <Button size="sm" onClick={handleClearChat} variant="outline">
+                        )}>
+                          <video src={m.content} width="750" height="500" controls />
+                        </div>
+                          :
+                          <Loading />
+                      }
+                    </AiResponse>
+                  }
+                </div>
+              ))
+            }
+            <div className="absolute left-0 bottom-0 text-right w-full pr-3">
+              <Button
+                size="sm"
+                onClick={handleClearChat}
+                variant="outline"
+              >
                 Clear chat
               </Button>
             </div>
           </>
-        ) : (
-          <ToolsNavigation title="Conversation" />
-        )}
+          : <ToolsNavigation title="Video"/>}
       </div>
       <div className="mb-[13px]">
         <Form {...form}>
@@ -146,7 +149,7 @@ const ConversationPage = () => {
                 <FormItem className="w-full">
                   <FormControl>
                     <Textarea
-                      placeholder="send a message"
+                      placeholder="Clown fish swimming in a coral reef, beautiful, 8k, perfect, award winning, national geographic"
                       className="min-h-1 resize-none"
                       {...field}
                     />
@@ -158,8 +161,7 @@ const ConversationPage = () => {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="gradient-btn"
-              >
+                className="gradient-btn">
                 <Send />
               </Button>
             </div>
@@ -167,7 +169,7 @@ const ConversationPage = () => {
         </Form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ConversationPage;
+export default VideoPage;

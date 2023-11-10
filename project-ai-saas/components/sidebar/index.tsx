@@ -43,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           isMinimal && "lg:left-3"
         )}
       >
-        <div className="mb-4 p-4 rounded-lg bg-gray-900">
+        <div className="mb-4 p-4 rounded-lg bg-gray-800">
           <div className="mb-4 flex items-center ">
             <UserButton afterSignOutUrl="/" />
             {/* hien thi ten user */}

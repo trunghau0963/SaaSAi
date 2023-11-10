@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { BrainCircuit } from 'lucide-react'
+import { Aperture } from 'lucide-react'
 import { Poppins } from 'next/font/google'
 import React from 'react'
 interface LogoProps {
@@ -12,12 +12,12 @@ const Logo: React.FC<LogoProps> = ({className}) => {
         "flex items-center",
         className
     )}> 
-        <BrainCircuit color='#0ea5e9' size={40}/>
+        <Aperture color='#1faf76' size={40}/>
         <span className={cn(
             "ml-2 font-bold text-3xl",
             fontPoppins.className
         )}>
-            BrainFast
+            ChatGPT
         </span>
     </div>
   )
