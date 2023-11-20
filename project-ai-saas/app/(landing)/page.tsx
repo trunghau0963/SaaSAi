@@ -1,9 +1,13 @@
-import React from 'react'
+import Features from "@/components/landing/feature";
+import Hero from "@/components/landing/hero";
 
 const LandingPage = () => {
   return (
-    <div>LandingPage</div>
+    <div className="h-full w-full">
+      <Hero />
+      <Features />
+    </div>
   )
 }
 
-export default LandingPage
+export default LandingPage;

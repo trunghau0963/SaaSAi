@@ -23,6 +23,10 @@ import Loading from "@/components/loading";
 import { useToast } from "@/components/ui/use-toast";
 import ToolsNavigation from "@/components/dashboard/tools-navigation";
 import { useProStore } from "@/store/pro-store";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { AppDispatch } from "@/redux/store";
+import { toggleOpenOrClose } from "@/components/getPro/getProSlice";
 import Image from "next/image";
 
 const formSchema = z.object({
@@ -38,7 +42,11 @@ interface MessageType {
 }
 
 const PhotoPage = () => {
-  const { handleOpenOrCloseProModal } = useProStore();
+  // const { handleOpenOrCloseProModal } = useProStore();
+  const dispatch: AppDispatch = useDispatch()
+  const handleOpenOrCloseProModal = () => {
+    dispatch(toggleOpenOrClose());
+  };
   const { toast } = useToast();
   const containerRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<MessageType[]>([]);

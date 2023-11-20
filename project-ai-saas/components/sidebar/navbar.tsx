@@ -7,10 +7,22 @@ import Image from "next/image";
 import { NAVIGATIONS } from "@/constant";
 import { cn } from "@/lib/utils";
 import { useSidebarStore } from "@/store/sidebar-store";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { AppDispatch } from "@/redux/store";
+import {closeSidebar} from './sidebarSlice'
+
 
 const Navigation = () => {
-  const { isMinimal, handleClose } = useSidebarStore();
+  // const { isMinimal, handleClose } = useSidebarStore();
+  const dispatch: AppDispatch = useDispatch()
+  const { value} = useSelector((state: RootState) => state.sidebar);
+
   const pathName = usePathname();
+
+  const handleClose = () => {
+    dispatch(closeSidebar());
+  };
   return (
     <div className="px-4">
       {NAVIGATIONS.map(({ title, url, icon }, index) => (
@@ -20,7 +32,7 @@ const Navigation = () => {
               className={cn(
                 "flex items-center py-1 rounded-lg px-5 opacity-50",
                 "hover:opacity-100",
-                isMinimal && "px-1",
+                value.isMinimal && "px-1",
                 // dung pathname de kiem tra ng dung dang o
                 // url nao de shadow len
                 pathName.includes(url) &&
@@ -31,7 +43,7 @@ const Navigation = () => {
                 <div>
                   <Image width={24} height={24} src={icon} alt={title} />
                 </div>
-                {!isMinimal && <span className="ml-4 text-sm">{title}</span>}
+                {!value.isMinimal && <span className="ml-4 text-sm">{title}</span>}
               </div>
             </div>
           </Link>
