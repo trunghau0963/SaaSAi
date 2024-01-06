@@ -1,0 +1,62 @@
+POST http://localhost:8000/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "ntthau0963@gmail.com",
+  "email": "ntthau0963@gmail.com",
+  "password": "1234"
+}
+###
+
+POST http://localhost:8000/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser2",
+  "email": "example2@gmail.com",
+  "password": "123456789"
+}
+###
+
+POST http://localhost:8000/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "adminnn",
+  "email": "example2@gmail.com",
+  "password": "1234"
+}
+
+
+###
+
+POST http://localhost:8000/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "example@gmail.com",
+  "password": "1234"
+}
+###
+
+POST http://localhost:8000/v1/auth/refresh
+Cookies: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWY5NTgzYTFkYzI0OGQyMWVlMjQ4YyIsImFkbWluIjpmYWxzZSwiaWF0IjoxNzAwNzk2NzU5LCJleHAiOjE3MzIzMzI3NTl9.OH9l56xr6AzwkUWpMcskZhS76PIOGX5xkYCHI8tNWsE
+
+# gia su neu 2 login cung 1 luc, ma access token cua ng kia con thi nguoi nay co xem duoc kh 
+###
+GET http://localhost:8000/user 
+Authorization: Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWY5NTgzYTFkYzI0OGQyMWVlMjQ4YyIsImFkbWluIjpmYWxzZSwiaWF0IjoxNzAwNzk2ODA3LCJleHAiOjE3MDA3OTY4Mjd9.b5NDCc-5fYYlKlBMCaoHJopwvobMPxtuciylH5N71-0
+
+###
+GET http://localhost:8000/user/info/655b33d1afc633aa1e090baf
+
+
+###
+DELETE http://localhost:8000/user/delete/655df32a67eabc361eb1c68e
+Authorization: Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWIyYThiYzY5YzM3YzIxOWFjNWFkZSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNzAwNjcxNDUxLCJleHAiOjE3MDA2NzE1MTF9.hNTR5zn19lKzOFEQcNkt5vOtFJvjjQvwR7H77ySaDLw
+
+###
+POST http://localhost:8000/v1/auth/logout
+Authorization: Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWUyZjJmM2VkMmIxNjEzYzIyODBlMCIsImFkbWluIjpmYWxzZSwiaWF0IjoxNzAwNzU2MTI0LCJleHAiOjE3MDA3NTYxODR9.8XUPQC0cHwlnggzxWa4qkOvXvVHxWfpEP2YKLOtPsI4
+Cookie: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWUyZjJmM2VkMmIxNjEzYzIyODBlMCIsImFkbWluIjpmYWxzZSwiaWF0IjoxNzAwNzU2MTI0LCJleHAiOjE3MzIyOTIxMjR9.nrN8cg0iNQ_v-hOVqZvayrZopaysNf4jRKbFMVRxCyU
